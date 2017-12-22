@@ -32,6 +32,22 @@ class A2BLEConnect extends BluetoothGattCallback {
         mGatt = device.connectGatt(context, false, this);
     }
 
+    public BluetoothGatt getConnection(Context context, String address) {
+        BluetoothDevice device = mAdapter.getRemoteDevice(address);
+        if (device == null) {
+            Log.w(TAG, "device not found, Unable to connect");
+            mGatt = null;
+            return null;
+        }
+        mGatt = device.connectGatt(context, false, this);
+        if (mGatt.connect()) {
+            return mGatt;
+        } else {
+            mGatt = null;
+            return null;
+        }
+    }
+
     @Override
     public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
         super.onConnectionStateChange(gatt, status, newState);
@@ -40,6 +56,9 @@ class A2BLEConnect extends BluetoothGattCallback {
             BLELog.log(address + "连接成功");
         } else {
             BLELog.log(address + "连接断开");
+            if (mGatt != null) {
+                mGatt.close();
+            }
         }
     }
 }
