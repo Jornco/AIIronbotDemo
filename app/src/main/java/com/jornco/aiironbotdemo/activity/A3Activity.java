@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.jornco.aiironbotdemo.R;
 import com.jornco.aiironbotdemo.ble.A1IronbotSearcher;
@@ -25,6 +26,7 @@ public class A3Activity extends AppCompatActivity implements View.OnClickListene
 
     private A3IronbotService mIronbotService;
     private A3IronbotSession mIronbotSession;
+    private TextView mTvDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class A3Activity extends AppCompatActivity implements View.OnClickListene
         mBtnScan.setOnClickListener(this);
         mBtnStop.setOnClickListener(this);
         mBtnConn.setOnClickListener(this);
+        mTvDevice = (TextView) findViewById(R.id.tv_device);
+        mTvDevice.setOnClickListener(this);
     }
 
     @Override
@@ -69,9 +73,15 @@ public class A3Activity extends AppCompatActivity implements View.OnClickListene
     }
 
     @Override
-    public void onIronbotFound(IronbotInfo info) {
+    public void onIronbotFound(final IronbotInfo info) {
         Log.e(TAG, "onIronbotFound: " + info.toString());
         mIronbotService = new A3IronbotService(info);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mTvDevice.setText(info.toString());
+            }
+        });
     }
 
     @Override
