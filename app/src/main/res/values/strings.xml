@@ -2,4 +2,5 @@
     <string name="app_name">AIIronbotDemo</string>
     <string name="scan">scan</string>
     <string name="stop_scan">stop_scan</string>
+    <string name="connect">connect</string>
 </resources>

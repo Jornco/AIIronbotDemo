@@ -25,7 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.A1SearchActivity"></activity>
+        <activity android:name=".activity.A1SearchActivity" />
+        <activity android:name=".activity.A2SearchActivity"></activity>
     </application>
 
 </manifest>
