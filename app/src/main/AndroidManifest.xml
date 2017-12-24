@@ -38,7 +38,8 @@
             android:name=".activity.A4Activity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".activity.A5Activity" />
-        <activity android:name=".activity.A6Activity"></activity>
+        <activity android:name=".activity.A6Activity" />
+        <activity android:name=".activity.A7Activity"></activity>
     </application>
 
 </manifest>

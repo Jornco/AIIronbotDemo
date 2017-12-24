@@ -10,6 +10,18 @@ public class IronbotInfo {
     private final String address;
     private BLEState state;
 
+    public IronbotInfo(String xml) {
+        if (xml == null) {
+            throw new IllegalArgumentException("xml can not be null");
+        }
+        String[] strings = xml.split(",");
+        if (strings.length != 2) {
+            throw new IllegalArgumentException("xml is invalid");
+        }
+        name = strings[0];
+        address = strings[1];
+    }
+
     public IronbotInfo(String name, String address) {
         this(name, address, BLEState.DISCONNECT);
     }
@@ -43,5 +55,9 @@ public class IronbotInfo {
                 ", address='" + address + '\'' +
                 ", state=" + state +
                 '}';
+    }
+
+    public String toXml() {
+        return name + "," + address;
     }
 }
