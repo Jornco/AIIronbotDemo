@@ -25,9 +25,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.A1SearchActivity" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".activity.A2SearchActivity" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".activity.A3Activity" android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".activity.A1SearchActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activity.A2SearchActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activity.A3Activity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activity.A4Activity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
