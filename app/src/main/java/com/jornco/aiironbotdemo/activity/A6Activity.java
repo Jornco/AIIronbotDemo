@@ -1,7 +1,8 @@
 package com.jornco.aiironbotdemo.activity;
 
-import android.os.Bundle;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,9 +22,9 @@ import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-public class A5Activity extends AppCompatActivity implements View.OnClickListener, IronbotSearcherCallback {
+public class A6Activity extends AppCompatActivity implements View.OnClickListener, IronbotSearcherCallback {
 
-    private static final String TAG = "A5Activity";
+    private static final String TAG = "A6Activity";
 
     private Button mBtnScan;
     private Button mBtnStop;
@@ -36,10 +37,12 @@ public class A5Activity extends AppCompatActivity implements View.OnClickListene
     private A5BLEService mService;
     private A5BLESession mSession;
 
+    private MediaPlayer mPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_a5);
+        setContentView(R.layout.activity_a6);
         initView();
     }
 
@@ -79,6 +82,24 @@ public class A5Activity extends AppCompatActivity implements View.OnClickListene
                 mService = mServiceList.get(0);
                 mSession = mService.getSession(this);
 
+                // 子线程播放音乐
+                new Thread() {
+                    @Override
+                    public void run() {
+                        if (mPlayer != null) {
+                            return;
+                        }
+                        mPlayer = MediaPlayer.create(A6Activity.this, R.raw.music);
+                        try {
+                            mPlayer.start();
+                        } catch (IllegalStateException e) {
+                            e.printStackTrace();
+                            Log.e(TAG, "error" + e.getMessage());
+                        }
+                    }
+                }.start();
+
+
                 String cmd = "#B255,0,0,*";
                 mSession.sendMsg(IronbotCode.create(cmd), new OnIronbotWriteCallback() {
                     @Override
@@ -86,7 +107,7 @@ public class A5Activity extends AppCompatActivity implements View.OnClickListene
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(A5Activity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(A6Activity.this, "发送成功", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -96,7 +117,7 @@ public class A5Activity extends AppCompatActivity implements View.OnClickListene
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(A5Activity.this, "发送失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(A6Activity.this, "发送失败", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -131,6 +152,9 @@ public class A5Activity extends AppCompatActivity implements View.OnClickListene
     protected void onStop() {
         super.onStop();
         mSearcher.stopScan();
+        if (mPlayer != null) {
+            mPlayer.stop();
+            mPlayer.release();
+        }
     }
-
 }
