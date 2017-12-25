@@ -17,7 +17,7 @@ import com.jornco.aiironbotdemo.ble.common.BLEWriterError;
 import com.jornco.aiironbotdemo.ble.connect.OnIronbotWriteCallback;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;
-import com.jornco.aiironbotdemo.util.RobotUtil;
+import com.jornco.aiironbotdemo.util.IronbotCodeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +107,7 @@ public class A6Activity extends AppCompatActivity implements View.OnClickListene
                 if (mSession == null) {
                     return;
                 }
-                mSession.sendMsg(RobotUtil.createRandomLED(), new OnIronbotWriteCallback() {
+                mSession.sendMsg(IronbotCodeUtil.createRandomLED(), new OnIronbotWriteCallback() {
                     @Override
                     public void onWriterSuccess(String address) {
                         runOnUiThread(new Runnable() {

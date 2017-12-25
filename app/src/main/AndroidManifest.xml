@@ -64,6 +64,7 @@
         <service
             android:name=".service.A9MyService"
             android:enabled="true"
+            android:process=":remote"
             android:exported="true">
         </service>
 
@@ -77,6 +78,7 @@
         <service
             android:name=".service.A11MyService"
             android:enabled="true"
+            android:process=":remote"
             android:exported="true">
         </service>
 
@@ -88,6 +90,7 @@
         <service
             android:name=".service.A12MyService"
             android:enabled="true"
+            android:process=":remote"
             android:exported="true">
         </service>
     </application>

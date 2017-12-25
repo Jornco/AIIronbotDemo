@@ -6,7 +6,7 @@ import com.jornco.aiironbotdemo.ble.common.IronbotCode;
  * Created by kkopite on 2017/12/25.
  */
 
-public class RobotUtil {
+public class IronbotCodeUtil {
 
     public static final String COLOR_CMD = "#B%d,%d,%d,*";
 
