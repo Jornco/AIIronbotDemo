@@ -46,6 +46,15 @@
         <activity
             android:name=".activity.A7Activity"
             android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".activity.A8SearchActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <service
+            android:name=".service.A8MyService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>
