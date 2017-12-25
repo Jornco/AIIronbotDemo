@@ -81,6 +81,11 @@ public class A2SearchActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
+    public void onIronbotFound(String xml) {
+
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         mSearcher.stopScan();

@@ -13,4 +13,6 @@ public interface IronbotSearcherCallback {
      * @param info 蓝牙设备
      */
     void onIronbotFound(IronbotInfo info);
+
+    void onIronbotFound(String xml);
 }

@@ -19,6 +19,7 @@ import com.jornco.aiironbotdemo.activity.A5Activity;
 import com.jornco.aiironbotdemo.activity.A6Activity;
 import com.jornco.aiironbotdemo.activity.A7Activity;
 import com.jornco.aiironbotdemo.activity.A8SearchActivity;
+import com.jornco.aiironbotdemo.activity.A9SearchActivity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             put("A6", A6Activity.class);
             put("A7", A7Activity.class);
             put("A8", A8SearchActivity.class);
+            put("A9", A9SearchActivity.class);
         }
     };
 

@@ -80,6 +80,15 @@ public class A8SearchActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        if (mBinder != null) {
+            mBinder.stopScan();
+        }
+        unbindService(mConnection);
+    }
+
+    @Override
     public void onIronbotFound(final IronbotInfo info) {
         Log.e(TAG, "onIronbotFound: " + info.toString());
         mDeviceInfo = info;
@@ -89,5 +98,10 @@ public class A8SearchActivity extends AppCompatActivity implements View.OnClickL
                 mTvDevice.setText(info.toString());
             }
         });
+    }
+
+    @Override
+    public void onIronbotFound(String xml) {
+
     }
 }

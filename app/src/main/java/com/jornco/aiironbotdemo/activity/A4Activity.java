@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 import com.jornco.aiironbotdemo.R;
 import com.jornco.aiironbotdemo.ble.A1IronbotSearcher;
-import com.jornco.aiironbotdemo.ble.A3IronbotService;
-import com.jornco.aiironbotdemo.ble.A3IronbotSession;
 import com.jornco.aiironbotdemo.ble.A4BLEService;
 import com.jornco.aiironbotdemo.ble.A4BLESession;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
@@ -91,6 +89,11 @@ public class A4Activity extends AppCompatActivity implements View.OnClickListene
             }
         }
         mServiceList.add(new A4BLEService(info));
+    }
+
+    @Override
+    public void onIronbotFound(String xml) {
+
     }
 
     @Override

@@ -153,6 +153,11 @@ public class A7Activity extends AppCompatActivity implements View.OnClickListene
     }
 
     @Override
+    public void onIronbotFound(String xml) {
+
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         mSearcher.stopScan();

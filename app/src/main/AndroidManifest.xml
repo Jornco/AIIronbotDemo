@@ -55,6 +55,15 @@
             android:enabled="true"
             android:exported="true">
         </service>
+
+        <activity android:name=".activity.A9SearchActivity">
+        </activity>
+
+        <service
+            android:name=".service.A9MyService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>
