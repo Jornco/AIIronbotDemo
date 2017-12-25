@@ -80,7 +80,9 @@
             android:exported="true">
         </service>
 
-        <activity android:name=".activity.A12SearchActivity">
+        <activity
+            android:name=".activity.A12SearchActivity"
+            android:parentActivityName=".MainActivity">
         </activity>
 
         <service
