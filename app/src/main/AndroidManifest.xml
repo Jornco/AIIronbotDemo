@@ -79,6 +79,15 @@
             android:enabled="true"
             android:exported="true">
         </service>
+
+        <activity android:name=".activity.A12SearchActivity">
+        </activity>
+
+        <service
+            android:name=".service.A12MyService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>
