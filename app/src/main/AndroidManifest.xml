@@ -27,68 +27,68 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.A1SearchActivity"
+            android:name=".activity.a1.A1SearchActivity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".activity.A2SearchActivity"
+            android:name=".activity.a2.A2SearchActivity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".activity.A3Activity"
+            android:name=".activity.a3.A3Activity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".activity.A4Activity"
+            android:name=".activity.a4.A4Activity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".activity.A5Activity"
+            android:name=".activity.a5.A5Activity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".activity.A6Activity"
+            android:name=".activity.a6.A6Activity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".activity.A7Activity"
+            android:name=".activity.a7.A7Activity"
             android:parentActivityName=".MainActivity"/>
         <activity
-            android:name=".activity.A8SearchActivity"
+            android:name=".activity.a8.A8SearchActivity"
             android:parentActivityName=".MainActivity"/>
 
         <service
-            android:name=".service.A8MyService"
+            android:name=".activity.a8.service.A8MyService"
             android:enabled="true"
             android:exported="true">
         </service>
 
         <activity
-            android:name=".activity.A9SearchActivity"
+            android:name=".activity.a9.A9SearchActivity"
             android:parentActivityName=".MainActivity"/>
 
         <service
-            android:name=".service.A9MyService"
-            android:enabled="true"
-            android:process=":remote"
-            android:exported="true">
-        </service>
-
-        <activity
-            android:name=".activity.A10SearchActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity
-            android:name=".activity.A11SearchActivity"
-            android:parentActivityName=".MainActivity"/>
-
-        <service
-            android:name=".service.A11MyService"
+            android:name=".activity.a9.service.A9MyService"
             android:enabled="true"
             android:process=":remote"
             android:exported="true">
         </service>
 
         <activity
-            android:name=".activity.A12SearchActivity"
+            android:name=".activity.a10.A10SearchActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".activity.a11.A11SearchActivity"
+            android:parentActivityName=".MainActivity"/>
+
+        <service
+            android:name=".activity.a11.service.A11MyService"
+            android:enabled="true"
+            android:process=":remote"
+            android:exported="true">
+        </service>
+
+        <activity
+            android:name=".activity.a12.A12SearchActivity"
             android:parentActivityName=".MainActivity">
         </activity>
 
         <service
-            android:name=".service.A12MyService"
+            android:name=".activity.a12.service.A12MyService"
             android:enabled="true"
             android:process=":remote"
             android:exported="true">
