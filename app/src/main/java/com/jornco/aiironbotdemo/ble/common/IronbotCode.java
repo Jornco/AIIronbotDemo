@@ -1,4 +1,4 @@
-package com.jornco.aiironbotdemo.ble;
+package com.jornco.aiironbotdemo.ble.common;
 
 import java.util.ArrayList;
 import java.util.List;

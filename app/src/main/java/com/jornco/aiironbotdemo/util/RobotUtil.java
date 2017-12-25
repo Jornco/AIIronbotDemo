@@ -1,6 +1,6 @@
 package com.jornco.aiironbotdemo.util;
 
-import com.jornco.aiironbotdemo.ble.IronbotCode;
+import com.jornco.aiironbotdemo.ble.common.IronbotCode;
 
 /**
  * Created by kkopite on 2017/12/25.

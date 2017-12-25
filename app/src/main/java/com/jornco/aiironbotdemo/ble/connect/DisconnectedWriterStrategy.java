@@ -1,18 +1,20 @@
-package com.jornco.aiironbotdemo.ble;
+package com.jornco.aiironbotdemo.ble.connect;
 
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
+
+import com.jornco.aiironbotdemo.ble.common.BLEWriterError;
 
 
 /**
  * Created by kkopite on 2017/11/29.
  */
 
-class DisconnectedWriterStrategy implements IWriterStrategy {
+public class DisconnectedWriterStrategy implements IWriterStrategy {
 
     private String address;
 
-    DisconnectedWriterStrategy(String address) {
+    public DisconnectedWriterStrategy(String address) {
         this.address = address;
     }
 

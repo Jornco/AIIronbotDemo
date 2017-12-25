@@ -1,5 +1,8 @@
 package com.jornco.aiironbotdemo.ble;
 
+import com.jornco.aiironbotdemo.ble.common.IronbotCode;
+import com.jornco.aiironbotdemo.ble.connect.OnIronbotWriteCallback;
+
 /**
  * Created by kkopite on 2017/12/24.
  */

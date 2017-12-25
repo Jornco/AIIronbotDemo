@@ -1,4 +1,6 @@
-package com.jornco.aiironbotdemo.ble;
+package com.jornco.aiironbotdemo.ble.connect;
+
+import com.jornco.aiironbotdemo.ble.common.BLEWriterError;
 
 /**
  *

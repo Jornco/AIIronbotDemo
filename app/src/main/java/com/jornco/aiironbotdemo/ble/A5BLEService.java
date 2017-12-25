@@ -9,13 +9,20 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 
+import com.jornco.aiironbotdemo.ble.common.BLELog;
+import com.jornco.aiironbotdemo.ble.common.BLEWriterError;
+import com.jornco.aiironbotdemo.ble.common.IronbotCode;
+import com.jornco.aiironbotdemo.ble.connect.ConnectedWriterStrategy;
+import com.jornco.aiironbotdemo.ble.connect.DisconnectedWriterStrategy;
+import com.jornco.aiironbotdemo.ble.connect.IWriterStrategy;
+import com.jornco.aiironbotdemo.ble.connect.IronbotWriterCallback;
+import com.jornco.aiironbotdemo.ble.connect.MultiIronbotWriterCallback;
+import com.jornco.aiironbotdemo.ble.connect.OnIronbotWriteCallback;
 import com.jornco.aiironbotdemo.ble.device.BLEState;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
-import com.jornco.aiironbotdemo.ble.scan.IronbotFilter;
 import com.jornco.aiironbotdemo.ble.scan.IronbotRule;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**

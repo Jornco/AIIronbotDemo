@@ -1,4 +1,4 @@
-package com.jornco.aiironbotdemo.ble;
+package com.jornco.aiironbotdemo.ble.common;
 
 /**
  * Created by kkopite on 2017/12/24.

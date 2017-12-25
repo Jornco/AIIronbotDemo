@@ -3,6 +3,7 @@ package com.jornco.aiironbotdemo.ble;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 
+import com.jornco.aiironbotdemo.ble.common.BLELog;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 import com.jornco.aiironbotdemo.ble.scan.IronbotFilter;
 import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;

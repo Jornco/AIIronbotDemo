@@ -10,6 +10,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.jornco.aiironbotdemo.ble.common.BLELog;
+
 /**
  * Created by kkopite on 2017/12/22.
  */

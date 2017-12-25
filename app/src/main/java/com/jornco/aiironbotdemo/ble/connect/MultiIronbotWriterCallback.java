@@ -1,11 +1,13 @@
-package com.jornco.aiironbotdemo.ble;
+package com.jornco.aiironbotdemo.ble.connect;
+
+import com.jornco.aiironbotdemo.ble.common.BLEWriterError;
 
 /**
  * 用于同步给多个设备发送的回调
  * Created by kkopite on 2017/10/25.
  */
 
-class MultiIronbotWriterCallback implements IronbotWriterCallback {
+public class MultiIronbotWriterCallback implements IronbotWriterCallback {
 
     // 使用者的回调
     private final OnIronbotWriteCallback callback;
@@ -20,7 +22,7 @@ class MultiIronbotWriterCallback implements IronbotWriterCallback {
     // 剩余设备(发送未响应来的)
     private int num;
 
-    MultiIronbotWriterCallback(OnIronbotWriteCallback callback, OnSendListener sendListener, int num) {
+    public MultiIronbotWriterCallback(OnIronbotWriteCallback callback, OnSendListener sendListener, int num) {
         this.callback = callback;
         this.sendListener = sendListener;
         this.total = num;
@@ -73,7 +75,7 @@ class MultiIronbotWriterCallback implements IronbotWriterCallback {
     /**
      * 同步发送时各种回调
      */
-    interface OnSendListener {
+    public interface OnSendListener {
 
         /**
          * 给所有设备都发送完毕

@@ -1,15 +1,18 @@
-package com.jornco.aiironbotdemo.ble;
+package com.jornco.aiironbotdemo.ble.connect;
 
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.text.TextUtils;
+
+import com.jornco.aiironbotdemo.ble.common.BLEWriterError;
+import com.jornco.aiironbotdemo.ble.common.BLELog;
 
 
 /**
  * Created by kkopite on 2017/11/29.
  */
 
-class ConnectedWriterStrategy implements IWriterStrategy {
+public class ConnectedWriterStrategy implements IWriterStrategy {
 
     private static final int MOST_WRITE_LENGTH = 20;
 
@@ -18,7 +21,7 @@ class ConnectedWriterStrategy implements IWriterStrategy {
     private IronbotWriterCallback mCallback;
     private String address;
 
-    ConnectedWriterStrategy(String address) {
+    public ConnectedWriterStrategy(String address) {
         this.address = address;
     }
 

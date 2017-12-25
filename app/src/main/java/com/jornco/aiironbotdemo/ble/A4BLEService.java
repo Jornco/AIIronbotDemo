@@ -7,9 +7,8 @@ import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 
+import com.jornco.aiironbotdemo.ble.common.BLELog;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
-
-import org.w3c.dom.ProcessingInstruction;
 
 /**
  * Created by kkopite on 2017/12/24.
