@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.jornco.aiironbotdemo.activity.A10SearchActivity">
+              tools:context="com.jornco.aiironbotdemo.activity.A11SearchActivity">
 
     <Button
         android:id="@+id/btn_scan"

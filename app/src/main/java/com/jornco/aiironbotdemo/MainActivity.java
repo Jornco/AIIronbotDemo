@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.jornco.aiironbotdemo.activity.A10SearchActivity;
+import com.jornco.aiironbotdemo.activity.A11SearchActivity;
 import com.jornco.aiironbotdemo.activity.A1SearchActivity;
 import com.jornco.aiironbotdemo.activity.A2SearchActivity;
 import com.jornco.aiironbotdemo.activity.A3Activity;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             put("A8", A8SearchActivity.class);
             put("A9", A9SearchActivity.class);
             put("A10", A10SearchActivity.class);
+            put("A11", A11SearchActivity.class);
         }
     };
 

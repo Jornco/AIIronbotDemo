@@ -1,29 +1,29 @@
 package com.jornco.aiironbotdemo.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Parcel;
-import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.jornco.aiironbotdemo.R;
-import com.jornco.aiironbotdemo.ble.A10Search;
-import com.jornco.aiironbotdemo.ble.A10SearchProxy;
+import com.jornco.aiironbotdemo.ble.A11ISearch;
+import com.jornco.aiironbotdemo.ble.A11SearchProxy;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
-import com.jornco.aiironbotdemo.service.A9MyBinder;
-import com.jornco.aiironbotdemo.service.A9MyService;
+import com.jornco.aiironbotdemo.service.A11MyService;
 
-public class A10SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class A11SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String EVENT_FIND_DEVICE = "event_find_device";
     private static final String TAG = "A10SearchActivity";
-    private A9MyBinder mBinder;
+
     private IronbotInfo mDeviceInfo;
 
 
@@ -31,14 +31,14 @@ public class A10SearchActivity extends AppCompatActivity implements View.OnClick
     private Button mBtnStop;
     private TextView mTvDevice;
 
-    private IBinder mCallbackBinder;
-    private A10Search proxy;
-
+//    private IBinder mCallbackBinder;
+    private A11ISearch proxy;
+    private BroadcastReceiver mReceiver = new MyIntentReceiver();
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
 //            mBinder = (A9MyBinder) service;
-            proxy = new A10SearchProxy(service);
+            proxy = new A11SearchProxy(service);
         }
 
         @Override
@@ -50,10 +50,17 @@ public class A10SearchActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_a10_search);
+        setContentView(R.layout.activity_a11_search);
         initView();
-        bindService(new Intent(this, A9MyService.class), mConnection, BIND_AUTO_CREATE);
-        mCallbackBinder = new ActBinder();
+        bindService(new Intent(this, A11MyService.class), mConnection, BIND_AUTO_CREATE);
+//        mCallbackBinder = new ActBinder();
+        registerReceiver(mReceiver, new IntentFilter(EVENT_FIND_DEVICE));
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mReceiver);
+        super.onDestroy();
     }
 
     private void initView() {
@@ -73,7 +80,7 @@ public class A10SearchActivity extends AppCompatActivity implements View.OnClick
                     return;
                 }
                 if (proxy.isEnable()) {
-                    proxy.searchIronbot(mCallbackBinder);
+                    proxy.searchIronbot();
                 } else {
                     proxy.enable();
                 }
@@ -95,11 +102,10 @@ public class A10SearchActivity extends AppCompatActivity implements View.OnClick
         unbindService(mConnection);
     }
 
-    private class ActBinder extends Binder {
-
+    class MyIntentReceiver extends BroadcastReceiver {
         @Override
-        protected boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
-            String infoXml = data.readString();
+        public void onReceive(Context context, Intent intent) {
+            final String infoXml = intent.getStringExtra("value");
             mDeviceInfo = new IronbotInfo(infoXml);
             runOnUiThread(new Runnable() {
                 @Override
@@ -107,7 +113,6 @@ public class A10SearchActivity extends AppCompatActivity implements View.OnClick
                     mTvDevice.setText(mDeviceInfo.toString());
                 }
             });
-            return true;
         }
     }
 }
