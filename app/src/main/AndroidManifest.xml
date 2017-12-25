@@ -64,6 +64,9 @@
             android:enabled="true"
             android:exported="true">
         </service>
+
+        <activity android:name=".activity.A10SearchActivity">
+        </activity>
     </application>
 
 </manifest>

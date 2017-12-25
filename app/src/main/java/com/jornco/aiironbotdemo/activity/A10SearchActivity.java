@@ -14,13 +14,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jornco.aiironbotdemo.R;
+import com.jornco.aiironbotdemo.ble.A10Search;
+import com.jornco.aiironbotdemo.ble.A10SearchProxy;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 import com.jornco.aiironbotdemo.service.A9MyBinder;
 import com.jornco.aiironbotdemo.service.A9MyService;
 
-public class A9SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class A10SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "A9SearchActivity";
+    private static final String TAG = "A10SearchActivity";
     private A9MyBinder mBinder;
     private IronbotInfo mDeviceInfo;
 
@@ -29,14 +31,14 @@ public class A9SearchActivity extends AppCompatActivity implements View.OnClickL
     private Button mBtnStop;
     private TextView mTvDevice;
 
-    private IBinder mIBinder;
     private IBinder mCallbackBinder;
-
+    private A10Search proxy;
 
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            mBinder = (A9MyBinder) service;
+//            mBinder = (A9MyBinder) service;
+            proxy = new A10SearchProxy(service);
         }
 
         @Override
@@ -67,39 +69,18 @@ public class A9SearchActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_scan:
-                // 调用isEnable
-                Parcel data = Parcel.obtain();
-                Parcel reply = Parcel.obtain();
-                try {
-                    mBinder.transact(0, data, reply, 0);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
+                if (proxy == null) {
+                    return;
                 }
-                byte b = reply.readByte();
-                if (b == 1) {
-                    // 调用searchIronbot
-                    data.writeStrongBinder(mCallbackBinder);
-                    try {
-                        mBinder.transact(1, data, reply, 0);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
+                if (proxy.isEnable()) {
+                    proxy.searchIronbot(mCallbackBinder);
                 } else {
-                    try {
-                        mBinder.transact(2, data, reply, 0);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
+                    proxy.enable();
                 }
-
                 break;
             case R.id.btn_stop:
-                Parcel data2 = Parcel.obtain();
-                Parcel reply2 = Parcel.obtain();
-                try {
-                    mBinder.transact(3, data2, reply2, 0);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
+                if (proxy != null) {
+                    proxy.stopScan();
                 }
                 break;
         }
@@ -108,14 +89,8 @@ public class A9SearchActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onStop() {
         super.onStop();
-        Parcel data = Parcel.obtain();
-        Parcel reply = Parcel.obtain();
-        if (mBinder != null) {
-            try {
-                mBinder.transact(3, data, reply, 0);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+        if (proxy != null) {
+            proxy.stopScan();
         }
         unbindService(mConnection);
     }

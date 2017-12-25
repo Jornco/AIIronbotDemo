@@ -16,7 +16,7 @@ import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;
 public class A9MyBinder extends Binder implements IronbotSearcherCallback {
 
     private A8IronbotSearcher mSearcher = new A8IronbotSearcher();
-    IBinder mBinderCallback;
+    private IBinder mBinderCallback;
 
     @Override
     protected boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
