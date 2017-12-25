@@ -13,15 +13,15 @@ import com.jornco.aiironbotdemo.ble.A1IronbotSearcher;
 import com.jornco.aiironbotdemo.ble.A5BLEService;
 import com.jornco.aiironbotdemo.ble.A5BLESession;
 import com.jornco.aiironbotdemo.ble.BLEWriterError;
-import com.jornco.aiironbotdemo.ble.IronbotCode;
 import com.jornco.aiironbotdemo.ble.OnIronbotWriteCallback;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;
+import com.jornco.aiironbotdemo.util.RobotUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class A5Activity extends AppCompatActivity implements View.OnClickListener, IronbotSearcherCallback {
+public class A5Activity extends AppCompatActivity implements View.OnClickListener, IronbotSearcherCallback{
 
     private static final String TAG = "A5Activity";
 
@@ -35,6 +35,7 @@ public class A5Activity extends AppCompatActivity implements View.OnClickListene
 
     private A5BLEService mService;
     private A5BLESession mSession;
+    private Button mBtnSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,8 @@ public class A5Activity extends AppCompatActivity implements View.OnClickListene
         mSearcher = new A1IronbotSearcher();
         mServiceList = new ArrayList<>();
 
+        mBtnSend = (Button) findViewById(R.id.btn_send);
+        mBtnSend.setOnClickListener(this);
     }
 
     @Override
@@ -79,8 +82,12 @@ public class A5Activity extends AppCompatActivity implements View.OnClickListene
                 mService = mServiceList.get(0);
                 mSession = mService.getSession(this);
 
-                String cmd = "#B255,0,0,*";
-                mSession.sendMsg(IronbotCode.create(cmd), new OnIronbotWriteCallback() {
+                break;
+            case R.id.btn_send:
+                if (mSession == null) {
+                    return;
+                }
+                mSession.sendMsg(RobotUtil.createRandomLED(), new OnIronbotWriteCallback() {
                     @Override
                     public void onWriterSuccess(String address) {
                         runOnUiThread(new Runnable() {

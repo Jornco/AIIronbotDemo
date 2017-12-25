@@ -10,16 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jornco.aiironbotdemo.R;
-import com.jornco.aiironbotdemo.ble.A5BLEService;
-import com.jornco.aiironbotdemo.ble.A5BLESession;
 import com.jornco.aiironbotdemo.ble.A7ClientService;
 import com.jornco.aiironbotdemo.ble.A7ClientSession;
 import com.jornco.aiironbotdemo.ble.A7IronbotSearcher;
 import com.jornco.aiironbotdemo.ble.BLEWriterError;
-import com.jornco.aiironbotdemo.ble.IronbotCode;
 import com.jornco.aiironbotdemo.ble.OnIronbotWriteCallback;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;
+import com.jornco.aiironbotdemo.util.RobotUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +37,7 @@ public class A7Activity extends AppCompatActivity implements View.OnClickListene
     private MediaPlayer mPlayer;
 
     private A7IronbotSearcher mSearcher;
+    private Button mBtnSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +58,8 @@ public class A7Activity extends AppCompatActivity implements View.OnClickListene
 
         mSearcher = new A7IronbotSearcher();
         mServiceList = new ArrayList<>();
+        mBtnSend = (Button) findViewById(R.id.btn_send);
+        mBtnSend.setOnClickListener(this);
     }
 
     @Override
@@ -99,9 +100,12 @@ public class A7Activity extends AppCompatActivity implements View.OnClickListene
                     }
                 }.start();
 
-
-                String cmd = "#B255,0,0,*";
-                mBLESession.sendMsg(IronbotCode.create(cmd), new OnIronbotWriteCallback() {
+                break;
+            case R.id.btn_send:
+                if (mBLESession == null) {
+                    return;
+                }
+                mBLESession.sendMsg(RobotUtil.createRandomLED(), new OnIronbotWriteCallback() {
                     @Override
                     public void onWriterSuccess(String address) {
                         runOnUiThread(new Runnable() {
@@ -138,6 +142,23 @@ public class A7Activity extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onIronbotFound(IronbotInfo info) {
+        Log.e(TAG, "onIronbotFound: " + info.toString());
+        for (A7ClientService service : mServiceList) {
+            String address = service.getInfo().getAddress();
+            if (address != null && address.equals(info.getAddress())) {
+                return;
+            }
+        }
+        mServiceList.add(new A7ClientService(info));
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mSearcher.stopScan();
+        if (mPlayer != null) {
+            mPlayer.stop();
+            mPlayer.release();
+        }
     }
 }

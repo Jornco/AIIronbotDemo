@@ -36,8 +36,9 @@ public class A7BLEScan implements BluetoothAdapter.LeScanCallback {
         if (mFilter.filter(device)) {
             String address = device.getAddress();
             String name = device.getName();
-            IronbotInfo info = new IronbotInfo(address, name);
+            IronbotInfo info = new IronbotInfo(name, address);
             A5BLEService srv = new A5BLEService(info);
+            A7IronbotSearcher.mServices.put(address, srv);
             if (mCallback != null) {
                 mCallback.onIronbotFound(info);
                 // ??

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jornco.aiironbotdemo">
+          package="com.jornco.aiironbotdemo">
 
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <uses-feature
         android:name="android.hardware.bluetooth_le"
-        android:required="true" />
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
@@ -20,26 +20,32 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.A1SearchActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".activity.A2SearchActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".activity.A3Activity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".activity.A4Activity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".activity.A5Activity" />
-        <activity android:name=".activity.A6Activity" />
-        <activity android:name=".activity.A7Activity"></activity>
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".activity.A5Activity"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".activity.A6Activity"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".activity.A7Activity"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

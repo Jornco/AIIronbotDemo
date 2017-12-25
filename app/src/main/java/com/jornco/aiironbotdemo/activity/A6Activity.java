@@ -1,8 +1,8 @@
 package com.jornco.aiironbotdemo.activity;
 
 import android.media.MediaPlayer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +14,10 @@ import com.jornco.aiironbotdemo.ble.A1IronbotSearcher;
 import com.jornco.aiironbotdemo.ble.A5BLEService;
 import com.jornco.aiironbotdemo.ble.A5BLESession;
 import com.jornco.aiironbotdemo.ble.BLEWriterError;
-import com.jornco.aiironbotdemo.ble.IronbotCode;
 import com.jornco.aiironbotdemo.ble.OnIronbotWriteCallback;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;
+import com.jornco.aiironbotdemo.util.RobotUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +38,7 @@ public class A6Activity extends AppCompatActivity implements View.OnClickListene
     private A5BLESession mSession;
 
     private MediaPlayer mPlayer;
+    private Button mBtnSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,8 @@ public class A6Activity extends AppCompatActivity implements View.OnClickListene
         mSearcher = new A1IronbotSearcher();
         mServiceList = new ArrayList<>();
 
+        mBtnSend = (Button) findViewById(R.id.btn_send);
+        mBtnSend.setOnClickListener(this);
     }
 
     @Override
@@ -99,9 +102,12 @@ public class A6Activity extends AppCompatActivity implements View.OnClickListene
                     }
                 }.start();
 
-
-                String cmd = "#B255,0,0,*";
-                mSession.sendMsg(IronbotCode.create(cmd), new OnIronbotWriteCallback() {
+                break;
+            case R.id.btn_send:
+                if (mSession == null) {
+                    return;
+                }
+                mSession.sendMsg(RobotUtil.createRandomLED(), new OnIronbotWriteCallback() {
                     @Override
                     public void onWriterSuccess(String address) {
                         runOnUiThread(new Runnable() {

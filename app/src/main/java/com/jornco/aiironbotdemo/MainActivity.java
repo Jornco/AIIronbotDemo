@@ -14,6 +14,10 @@ import android.widget.Button;
 import com.jornco.aiironbotdemo.activity.A1SearchActivity;
 import com.jornco.aiironbotdemo.activity.A2SearchActivity;
 import com.jornco.aiironbotdemo.activity.A3Activity;
+import com.jornco.aiironbotdemo.activity.A4Activity;
+import com.jornco.aiironbotdemo.activity.A5Activity;
+import com.jornco.aiironbotdemo.activity.A6Activity;
+import com.jornco.aiironbotdemo.activity.A7Activity;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -27,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
             put("A1", A1SearchActivity.class);
             put("A2", A2SearchActivity.class);
             put("A3", A3Activity.class);
+            put("A4", A4Activity.class);
+            put("A5", A5Activity.class);
+            put("A6", A6Activity.class);
+            put("A7", A7Activity.class);
         }
     };
 

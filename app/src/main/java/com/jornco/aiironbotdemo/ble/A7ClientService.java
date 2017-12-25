@@ -11,15 +11,23 @@ import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 public class A7ClientService {
 
     private A5BLEService mBLEService;
+    private IronbotInfo mInfo;
 
     public A7ClientService(IronbotInfo info) {
+        mInfo = info;
         mBLEService = A7IronbotSearcher.findService(info);
     }
 
+    public IronbotInfo getInfo() {
+        return mInfo;
+    }
+
     public A7ClientSession getSession(Context context) {
+        if (mBLEService == null) {
+            return null;
+        }
         A5BLESession session = mBLEService.getSession(context);
-        A7ClientSession cs = new A7ClientSession(session);
-        return cs;
+        return new A7ClientSession(session);
     }
 
 }
