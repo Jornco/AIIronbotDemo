@@ -59,7 +59,7 @@ public class A14SearchBinder extends ISearchIronbot.Stub implements IronbotSearc
     }
 
     @Override
-    public void findService(String infoXml) throws RemoteException {
+    public IBinder findService(String infoXml) throws RemoteException {
         IronbotInfo info = new IronbotInfo(infoXml);
         A13BLEService service = mSearcher.findService(info);
         IBinder ibSrv = new A14SrvBinder(service, mBinderCallback);
@@ -68,5 +68,6 @@ public class A14SearchBinder extends ISearchIronbot.Stub implements IronbotSearc
         Parcel reply2 = Parcel.obtain();
         data2.writeStrongBinder(ibSrv);
         mBinderCallback.transact(1, data2, reply2, 0);
+        return null;
     }
 }

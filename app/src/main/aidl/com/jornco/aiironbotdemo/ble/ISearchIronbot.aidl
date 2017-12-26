@@ -9,5 +9,5 @@ interface ISearchIronbot {
     void searchIronbot(IBinder callback);
     void enable();
     void stopScan();
-    void findService(String infoXml);
+    IBinder findService(String infoXml);
 }

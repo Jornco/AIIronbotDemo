@@ -1,28 +1,33 @@
-package com.jornco.aiironbotdemo.activity.a12.service;
+package com.jornco.aiironbotdemo.activity.a15.service;
 
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-import com.jornco.aiironbotdemo.activity.a8.A8IronbotSearcher;
+import com.jornco.aiironbotdemo.activity.a13.A13BLEService;
+import com.jornco.aiironbotdemo.activity.a13.A13IronbotSearcher;
+import com.jornco.aiironbotdemo.activity.a14.A14SrvBinder;
 import com.jornco.aiironbotdemo.ble.ISearchIronbot;
+import com.jornco.aiironbotdemo.ble.common.BLELog;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;
 
 /**
- * Created by kkopite on 2017/12/25.
+ * Created by kkopite on 2017/12/26.
  */
 
-public class A12MyBinder extends ISearchIronbot.Stub implements IronbotSearcherCallback {
+public class A15SearchBinder extends ISearchIronbot.Stub implements IronbotSearcherCallback {
 
-    private A8IronbotSearcher mSearcher = new A8IronbotSearcher();
+    private A13IronbotSearcher mSearcher = new A13IronbotSearcher();
     private IBinder mBinderCallback;
 
     @Override
     public void onIronbotFound(IronbotInfo info) {
+        BLELog.log(info.toString());
         Parcel data2 = Parcel.obtain();
         Parcel reply2 = Parcel.obtain();
-        data2.writeString(info.toXml());
+        // 調用IronbotInfo的toXml()
+        data2.writeString( info.toXml() );
         try {
             mBinderCallback.transact(0, data2, reply2, 0);
         } catch (RemoteException e) {
@@ -58,7 +63,8 @@ public class A12MyBinder extends ISearchIronbot.Stub implements IronbotSearcherC
 
     @Override
     public IBinder findService(String infoXml) throws RemoteException {
-        return null;
+        IronbotInfo info = new IronbotInfo(infoXml);
+        A13BLEService service = mSearcher.findService(info);
+        return new A14SrvBinder(service, mBinderCallback);
     }
-
 }

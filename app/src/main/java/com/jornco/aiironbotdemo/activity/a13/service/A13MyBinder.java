@@ -56,7 +56,7 @@ public class A13MyBinder extends ISearchIronbot.Stub implements IronbotSearcherC
     }
 
     @Override
-    public void findService(String infoXml) throws RemoteException {
-
+    public IBinder findService(String infoXml) throws RemoteException {
+        return null;
     }
 }
