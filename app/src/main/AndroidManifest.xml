@@ -64,8 +64,8 @@
         <service
             android:name=".activity.a9.service.A9MyService"
             android:enabled="true"
-            android:process=":remote"
-            android:exported="true">
+            android:exported="true"
+            android:process=":remote">
         </service>
 
         <activity
@@ -78,8 +78,8 @@
         <service
             android:name=".activity.a11.service.A11MyService"
             android:enabled="true"
-            android:process=":remote"
-            android:exported="true">
+            android:exported="true"
+            android:process=":remote">
         </service>
 
         <activity
@@ -90,8 +90,20 @@
         <service
             android:name=".activity.a12.service.A12MyService"
             android:enabled="true"
-            android:process=":remote"
-            android:exported="true">
+            android:exported="true"
+            android:process=":remote">
+        </service>
+
+        <activity
+            android:name=".activity.a13.A13SearchActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
+        <service
+            android:name=".activity.a13.service.A13MyService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
         </service>
     </application>
 

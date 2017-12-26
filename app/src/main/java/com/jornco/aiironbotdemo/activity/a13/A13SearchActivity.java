@@ -1,4 +1,4 @@
-package com.jornco.aiironbotdemo.activity.a12;
+package com.jornco.aiironbotdemo.activity.a13;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -14,11 +14,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jornco.aiironbotdemo.R;
-import com.jornco.aiironbotdemo.activity.a12.service.A12MyService;
+import com.jornco.aiironbotdemo.activity.a13.service.A13MyService;
 import com.jornco.aiironbotdemo.ble.ISearchIronbot;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 
-public class A12SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class A13SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "A10SearchActivity";
     private IronbotInfo mDeviceInfo;
@@ -45,9 +45,9 @@ public class A12SearchActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_a12_search);
+        setContentView(R.layout.activity_a13_search);
         initView();
-        bindService(new Intent(this, A12MyService.class), mConnection, BIND_AUTO_CREATE);
+        bindService(new Intent(this, A13MyService.class), mConnection, BIND_AUTO_CREATE);
         mCallbackBinder = new ActBinder();
     }
 

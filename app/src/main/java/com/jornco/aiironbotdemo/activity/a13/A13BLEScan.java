@@ -1,4 +1,4 @@
-package com.jornco.aiironbotdemo.activity.a8;
+package com.jornco.aiironbotdemo.activity.a13;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -9,20 +9,16 @@ import com.jornco.aiironbotdemo.ble.scan.IronbotFilter;
 import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;
 
 /**
- * Created by kkopite on 2017/12/25.
+ * Created by kkopite on 2017/12/26.
  */
 
-public class A8BLEScan implements BluetoothAdapter.LeScanCallback {
+public class A13BLEScan implements BluetoothAdapter.LeScanCallback {
 
-    private BluetoothAdapter mAdapter;
+    private BluetoothAdapter mAdapter = BluetoothAdapter.getDefaultAdapter();
     private IronbotSearcherCallback mCallback;
     private IronbotFilter mFilter;
 
-    public A8BLEScan() {
-        mAdapter = BluetoothAdapter.getDefaultAdapter();
-    }
-
-    public void searchIronbot(IronbotSearcherCallback callback, IronbotFilter filter) {
+    void searchIronbot(IronbotSearcherCallback callback, IronbotFilter filter) {
         if (mAdapter == null || !mAdapter.isEnabled()) {
             BLELog.log("藍芽不可用");
             return;
@@ -38,25 +34,24 @@ public class A8BLEScan implements BluetoothAdapter.LeScanCallback {
             String address = device.getAddress();
             String name = device.getName();
             IronbotInfo info = new IronbotInfo(name, address);
-
+            A13BLEService srv = new A13BLEService(info);
+            A13IronbotSearcher.mServiceList.put(address, srv);
             if (mCallback != null) {
                 mCallback.onIronbotFound(info);
-                // ??
-//                mCallback.onIronbotFound(info.toXml());
             }
         }
     }
 
-    public boolean isEnable(){
+    boolean isEnable(){
         return mAdapter != null && mAdapter.isEnabled();
     }
 
-    public void enable() {
+    void enable() {
         if (mAdapter != null) {
             mAdapter.enable();
         }
     }
-    public void stopScan(){
+    void stopScan(){
         mAdapter.stopLeScan(this);
         mCallback = null;
     }
