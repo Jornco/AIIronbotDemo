@@ -56,4 +56,9 @@ public class A12MyBinder extends ISearchIronbot.Stub implements IronbotSearcherC
         mSearcher.stopScan();
     }
 
+    @Override
+    public void findService(String infoXml) throws RemoteException {
+
+    }
+
 }

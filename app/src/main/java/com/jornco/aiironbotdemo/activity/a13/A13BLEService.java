@@ -18,4 +18,7 @@ public class A13BLEService extends BluetoothGattCallback {
         mAddress = info.getAddress();
     }
 
+    public IronbotInfo getInfo() {
+        return mInfo;
+    }
 }

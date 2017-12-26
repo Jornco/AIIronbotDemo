@@ -2,6 +2,7 @@ package com.jornco.aiironbotdemo.activity.a13;
 
 import android.bluetooth.BluetoothDevice;
 
+import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 import com.jornco.aiironbotdemo.ble.scan.IronbotFilter;
 import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;
 
@@ -36,5 +37,10 @@ public class A13IronbotSearcher {
     }
     public void enable() {
         mBLEScan.enable();
+    }
+
+    public A13BLEService findService(IronbotInfo info) {
+        String address = info.getAddress();
+        return mServiceList.get(address);
     }
 }
