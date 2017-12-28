@@ -189,6 +189,18 @@
             android:exported="true"
             android:process=":remote">
         </service>
+
+        <activity
+            android:name=".activity.a21.A21Activity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
+        <service
+            android:name=".activity.a21.service.A21MusicService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.jornco.aiironbotdemo.activity.a20.service;
 
 import android.os.IBinder;
+import android.os.Parcel;
 import android.os.RemoteException;
 
 import com.jornco.aiironbotdemo.IApplication;
@@ -8,6 +9,7 @@ import com.jornco.aiironbotdemo.activity.a19.A19BLEService;
 import com.jornco.aiironbotdemo.activity.a19.A19BLESession;
 import com.jornco.aiironbotdemo.activity.a19.A19IronbotSearcher;
 import com.jornco.aiironbotdemo.ble.IDance;
+import com.jornco.aiironbotdemo.ble.common.BLELog;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 import com.jornco.aiironbotdemo.ble.scan.IronbotSearcherCallback;
 import com.jornco.aiironbotdemo.util.ActionSendHelper;
@@ -33,7 +35,16 @@ public class A20DanceBinder extends IDance.Stub implements IronbotSearcherCallba
     private TimerTask mTask;
     @Override
     public void onIronbotFound(IronbotInfo info) {
-
+        BLELog.log(info.toString());
+        Parcel data2 = Parcel.obtain();
+        Parcel reply2 = Parcel.obtain();
+        // 調用IronbotInfo的toXml()
+        data2.writeString( info.toXml() );
+        try {
+            mBinderCallback.transact(0, data2, reply2, 0);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -77,6 +88,9 @@ public class A20DanceBinder extends IDance.Stub implements IronbotSearcherCallba
     public void startDance() throws RemoteException {
         if (mHelper != null) {
             mHelper.stop();
+        }
+        if (mSession == null) {
+            return;
         }
         mHelper = new ActionSendHelper(mSession, IronbotCodeUtil.createRandomAction());
         mHelper.start();

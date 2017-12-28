@@ -1,4 +1,4 @@
-package com.jornco.aiironbotdemo.activity.a20;
+package com.jornco.aiironbotdemo.activity.a21;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import com.jornco.aiironbotdemo.R;
 import com.jornco.aiironbotdemo.activity.a20.service.A20DanceService;
+import com.jornco.aiironbotdemo.activity.a21.service.A21MusicService;
 import com.jornco.aiironbotdemo.ble.IDance;
+import com.jornco.aiironbotdemo.ble.IMusic;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 
-public class A20Activity extends AppCompatActivity implements View.OnClickListener {
+public class A21Activity extends AppCompatActivity implements View.OnClickListener {
 
     private IronbotInfo mDeviceInfo;
 
@@ -29,12 +31,25 @@ public class A20Activity extends AppCompatActivity implements View.OnClickListen
     private TextView mTvDevice;
 
     private IBinder mCallbackBinder;
-    private IDance dancer;
+    private IDance mDance;
+    private IMusic mMusic;
 
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            dancer = IDance.Stub.asInterface(service);
+            mDance = IDance.Stub.asInterface(service);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
+    private ServiceConnection mMusicConnect = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mMusic = IMusic.Stub.asInterface(service);
         }
 
         @Override
@@ -47,9 +62,10 @@ public class A20Activity extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_a20);
+        setContentView(R.layout.activity_a21);
         initView();
         bindService(new Intent(this, A20DanceService.class), mConnection, BIND_AUTO_CREATE);
+        bindService(new Intent(this, A21MusicService.class), mMusicConnect, BIND_AUTO_CREATE);
         mCallbackBinder = new ActBinder();
     }
 
@@ -70,20 +86,20 @@ public class A20Activity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_scan:
-                if (dancer == null) {
+                if (mDance == null) {
                     return;
                 }
                 try {
-                    dancer.startScan(mCallbackBinder);
+                    mDance.startScan(mCallbackBinder);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
                 break;
             case R.id.btn_find:
                 try {
-                    int count = dancer.getServicesCount();
+                    int count = mDance.getServicesCount();
                     if (count != 0) {
-                        dancer.bindService(0);
+                        mDance.bindService(0);
                     }
                 } catch (RemoteException e) {
                     e.printStackTrace();
@@ -91,14 +107,16 @@ public class A20Activity extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.btn_start_dance:
                 try {
-                    dancer.startDance();
+                    mDance.startDance();
+                    mMusic.playMusic();
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
                 break;
             case R.id.btn_stop_dance:
                 try {
-                    dancer.stopDance();
+                    mDance.stopDance();
+                    mMusic.stopMusic();
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -109,6 +127,21 @@ public class A20Activity extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onStop() {
         super.onStop();
+        if (mMusic != null) {
+            try {
+                mMusic.stopMusic();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        if (mDance != null) {
+            try {
+                mDance.stopDance();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        unbindService(mMusicConnect);
         unbindService(mConnection);
     }
 
