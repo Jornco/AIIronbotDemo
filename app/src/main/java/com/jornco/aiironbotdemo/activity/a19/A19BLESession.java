@@ -2,6 +2,7 @@ package com.jornco.aiironbotdemo.activity.a19;
 
 import android.bluetooth.BluetoothGatt;
 
+import com.jornco.aiironbotdemo.ble.common.ISend;
 import com.jornco.aiironbotdemo.ble.common.IronbotCode;
 import com.jornco.aiironbotdemo.ble.connect.OnIronbotWriteCallback;
 
@@ -9,7 +10,7 @@ import com.jornco.aiironbotdemo.ble.connect.OnIronbotWriteCallback;
  * Created by kkopite on 2017/12/28.
  */
 
-public class A19BLESession {
+public class A19BLESession implements ISend{
     private BluetoothGatt mGatt;
     private A19BLEService mService = null;
 
@@ -22,6 +23,7 @@ public class A19BLESession {
         return mService.getInfo().toXml();
     }
 
+    @Override
     public void sendMsg(IronbotCode code, OnIronbotWriteCallback callback) {
         mService.sendMsg(code, callback);
     }

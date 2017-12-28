@@ -168,12 +168,23 @@
 
         <activity
             android:name=".activity.a19.A19Activity"
-            android:parentActivityName=".MainActivity"
-            >
+            android:parentActivityName=".MainActivity">
         </activity>
 
         <service
             android:name=".activity.a19.service.A19MyService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
+
+        <activity
+            android:name=".activity.a20.A20Activity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
+        <service
+            android:name=".activity.a20.service.A20DanceService"
             android:enabled="true"
             android:exported="true"
             android:process=":remote">

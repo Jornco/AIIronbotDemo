@@ -5,17 +5,11 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.jornco.aiironbotdemo.activity.a19.A19Activity">
+              tools:context="com.jornco.aiironbotdemo.activity.a20.A20Activity">
 
     <Button
         android:id="@+id/btn_scan"
         android:text="@string/scan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btn_stop"
-        android:text="@string/stop_scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -26,8 +20,14 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btn_send"
-        android:text="@string/send"
+        android:id="@+id/btn_start_dance"
+        android:text="@string/start_dance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_stop_dance"
+        android:text="@string/stop_dance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -36,4 +36,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>
+
 

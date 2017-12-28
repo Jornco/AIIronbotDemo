@@ -51,7 +51,7 @@ public class A19Activity extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_a15_search);
+        setContentView(R.layout.activity_a19);
         initView();
         bindService(new Intent(this, A19MyService.class), mConnection, BIND_AUTO_CREATE);
         mCallbackBinder = new ActBinder();
