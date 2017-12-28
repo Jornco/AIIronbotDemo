@@ -45,4 +45,8 @@ public class IronbotCode {
         }
         return codes;
     }
+
+    public String toXml() {
+        return data;
+    }
 }

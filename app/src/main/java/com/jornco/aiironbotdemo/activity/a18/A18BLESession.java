@@ -18,4 +18,5 @@ public class A18BLESession {
     public String getServiceInfoXml() {
         return mService.getInfo().toXml();
     }
+
 }

@@ -165,6 +165,19 @@
             android:exported="true"
             android:process=":remote">
         </service>
+
+        <activity
+            android:name=".activity.a19.A19Activity"
+            android:parentActivityName=".MainActivity"
+            >
+        </activity>
+
+        <service
+            android:name=".activity.a19.service.A19MyService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
     </application>
 
 </manifest>

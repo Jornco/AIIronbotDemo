@@ -21,6 +21,7 @@ import com.jornco.aiironbotdemo.activity.a15.A15SearchActivity;
 import com.jornco.aiironbotdemo.activity.a16.A16SearchActivity;
 import com.jornco.aiironbotdemo.activity.a17.A17SearchActivity;
 import com.jornco.aiironbotdemo.activity.a18.A18Activity;
+import com.jornco.aiironbotdemo.activity.a19.A19Activity;
 import com.jornco.aiironbotdemo.activity.a2.A2SearchActivity;
 import com.jornco.aiironbotdemo.activity.a3.A3Activity;
 import com.jornco.aiironbotdemo.activity.a4.A4Activity;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             put("A16", A16SearchActivity.class);
             put("A17", A17SearchActivity.class);
             put("A18", A18Activity.class);
+            put("A19", A19Activity.class);
         }
     };
 
