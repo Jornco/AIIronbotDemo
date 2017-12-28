@@ -201,6 +201,15 @@
             android:exported="true"
             android:process=":remote">
         </service>
+
+        <activity android:name=".activity.a22.A22Activity">
+        </activity>
+
+        <service
+            android:name=".activity.a22.service.A22MotorService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

@@ -7,4 +7,5 @@
     <string name="find_service">str_find</string>
     <string name="stop_dance">stop dance</string>
     <string name="start_dance">start dance</string>
+    <string name="motor_info">motor info</string>
 </resources>
