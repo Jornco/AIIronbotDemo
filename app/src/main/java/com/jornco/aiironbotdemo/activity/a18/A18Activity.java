@@ -1,4 +1,4 @@
-package com.jornco.aiironbotdemo.activity.a17;
+package com.jornco.aiironbotdemo.activity.a18;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -14,15 +14,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jornco.aiironbotdemo.R;
-import com.jornco.aiironbotdemo.activity.a17.service.A17MyService;
+import com.jornco.aiironbotdemo.activity.a18.service.A18MyService;
 import com.jornco.aiironbotdemo.ble.ISearchIronbot;
 import com.jornco.aiironbotdemo.ble.IronbotService;
-import com.jornco.aiironbotdemo.ble.common.BLELog;
+import com.jornco.aiironbotdemo.ble.IronbotSession;
 import com.jornco.aiironbotdemo.ble.device.IronbotInfo;
 
-public class A17SearchActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private static final String TAG = "A17SearchActivity";
+public class A18Activity extends AppCompatActivity implements View.OnClickListener {
     private IronbotInfo mDeviceInfo;
 
     private Button mBtnScan;
@@ -33,6 +31,7 @@ public class A17SearchActivity extends AppCompatActivity implements View.OnClick
     private IBinder mCallbackBinder;
     private ISearchIronbot proxy;
     private IronbotService mClientService;
+    private IronbotSession mClientSession;
 
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
@@ -49,9 +48,9 @@ public class A17SearchActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_a17_search);
+        setContentView(R.layout.activity_a15_search);
         initView();
-        bindService(new Intent(this, A17MyService.class), mConnection, BIND_AUTO_CREATE);
+        bindService(new Intent(this, A18MyService.class), mConnection, BIND_AUTO_CREATE);
         mCallbackBinder = new ActBinder();
     }
 
@@ -98,12 +97,16 @@ public class A17SearchActivity extends AppCompatActivity implements View.OnClick
                 }
                 try {
                     IBinder service = proxy.findService(mDeviceInfo.toXml());
+
+                    // A18SrvBinder
                     mClientService = IronbotService.Stub.asInterface(service);
 
-                    String infoXml = mClientService.getInfoXml();
+                    // A18SessionBinder
+                    IBinder ib2 = mClientService.getSession();
+                    mClientSession = IronbotSession.Stub.asInterface(ib2);
+                    String infoXml = mClientSession.getServiceInfoXml();
                     IronbotInfo info = new IronbotInfo(infoXml);
                     mTvDevice.setText(info.toString());
-                    BLELog.log("找到: " + infoXml);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }

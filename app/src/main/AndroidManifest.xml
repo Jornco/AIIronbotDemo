@@ -153,6 +153,18 @@
             android:exported="true"
             android:process=":remote">
         </service>
+
+        <activity
+            android:name=".activity.a18.A18Activity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
+        <service
+            android:name=".activity.a18.service.A18MyService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
     </application>
 
 </manifest>

@@ -72,6 +72,9 @@ public class A2BLEConnect extends BluetoothGattCallback {
 
         // toast 提示一下
         final String tmp = msg;
+        if (!(mContext instanceof Activity)) {
+            return;
+        }
         ((Activity) mContext).runOnUiThread(new Runnable() {
             @Override
             public void run() {
